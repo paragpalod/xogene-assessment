@@ -4,7 +4,7 @@ import AppShell from "../AppShell";
 
 const DrugDetails = () => {
   const { drugName } = useParams();
-  const [drug, setDrug] = useState([]);
+  const [drug, setDrug] = useState({});
   const [ndc, setNdc] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -46,7 +46,7 @@ const DrugDetails = () => {
         <div>Loading...</div>
       ) : (
         <>
-          {drug?.length > 0 && (
+          {Object.keys(drug || {})?.length > 0 && (
             <>
               <h2>Name of drug</h2>
               <div className="drug-details">
@@ -74,8 +74,9 @@ const DrugDetails = () => {
               </div>
             </>
           )}
-          {ndc?.length <= 0 &&  drug?.length <= 0 && <h2>
-            Selected drug details not available</h2>}
+          {ndc?.length <= 0 && drug?.length <= 0 && (
+            <h2>Selected drug details not available</h2>
+          )}
         </>
       )}
     </AppShell>
